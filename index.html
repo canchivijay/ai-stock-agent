@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Stock Scanner (NSE/BSE)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1>AI Stock Signal Scanner</h1>
+<p>Analyze any NSE/BSE listed stock</p>
+</header>
+
+<section class="search">
+<input type="text" id="symbolInput" placeholder="Enter stock symbol (Example: RELIANCE.NS or TCS.NS)">
+<button onclick="analyzeStock()">Analyze Stock</button>
+</section>
+
+<section class="result">
+<h2>Stock Analysis</h2>
+
+<p><b>Price:</b> <span id="price">--</span></p>
+<p><b>RSI:</b> <span id="rsi">--</span></p>
+<p><b>Signal:</b> <span id="signal">--</span></p>
+<p><b>Confidence:</b> <span id="confidence">--</span></p>
+
+</section>
+
+<section>
+<h2>NIFTY Market Trend</h2>
+<p id="niftyTrend">Loading...</p>
+</section>
+
+<section>
+<h2>Next Session Prediction</h2>
+<p id="prediction">Calculating...</p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
