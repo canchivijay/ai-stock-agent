@@ -32,21 +32,24 @@ alert("Enter a stock symbol");
 return;
 }
 
-let price = await getStock(symbol);
+async function getStock(symbol){
 
-let rsi = randomRSI();
+try{
 
-let sig = signal(rsi);
+let url = `https://corsproxy.io/?https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}`;
 
-document.getElementById("price").innerText = price;
+let response = await fetch(url);
 
-document.getElementById("rsi").innerText = rsi;
+let data = await response.json();
 
-document.getElementById("signal").innerText = sig[0];
+return data.quoteResponse.result[0].regularMarketPrice;
 
-document.getElementById("confidence").innerText = sig[1];
+}catch(err){
+
+alert("Stock data failed to load");
 
 }
+
 
 function marketPrediction(){
 
