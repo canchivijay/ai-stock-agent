@@ -50,6 +50,7 @@ alert("Stock data failed to load");
 
 }
 
+}
 
 function marketPrediction(){
 
