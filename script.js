@@ -1,24 +1,28 @@
+const API_KEY = "0KAH7ZIYNLK3Z61H";
+
 async function getStock(symbol){
 
 try{
 
-let url = `https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=demo`;
+let url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`;
 
 let response = await fetch(url);
 
 let data = await response.json();
 
-if(!data.length){
+let quote = data["Global Quote"];
+
+if(!quote){
 alert("Invalid stock symbol");
 return null;
 }
 
-return data[0].price;
+return quote["05. price"];
 
 }catch(error){
 
 console.log(error);
-alert("Stock API failed");
+alert("API error");
 
 }
 
@@ -43,24 +47,21 @@ async function analyzeStock(){
 let symbol = document.getElementById("symbolInput").value.trim();
 
 if(!symbol){
-alert("Enter stock symbol");
+alert("Enter symbol like RELIANCE.BSE");
 return;
 }
 
 let price = await getStock(symbol);
 
-if(price === null) return;
+if(!price) return;
 
 let rsi = randomRSI();
 
 let result = signal(rsi);
 
 document.getElementById("price").innerText = price;
-
 document.getElementById("rsi").innerText = rsi;
-
 document.getElementById("signal").innerText = result[0];
-
 document.getElementById("confidence").innerText = result[1];
 
 }
@@ -70,17 +71,11 @@ function marketPrediction(){
 let bullish = Math.random()>0.5;
 
 if(bullish){
-
 document.getElementById("niftyTrend").innerText="Bullish market bias";
-
 document.getElementById("prediction").innerText="Market may open higher tomorrow";
-
 }else{
-
 document.getElementById("niftyTrend").innerText="Bearish market bias";
-
 document.getElementById("prediction").innerText="Market may open lower tomorrow";
-
 }
 
 }
