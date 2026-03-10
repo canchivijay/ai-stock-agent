@@ -36,17 +36,23 @@ async function getStock(symbol){
 
 try{
 
-let url = `https://corsproxy.io/?https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}`;
+let url = `https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}`;
 
 let response = await fetch(url);
 
 let data = await response.json();
 
+if(!data.quoteResponse.result.length){
+alert("Invalid stock symbol");
+return null;
+}
+
 return data.quoteResponse.result[0].regularMarketPrice;
 
-}catch(err){
+}catch(error){
 
-alert("Stock data failed to load");
+console.log(error);
+alert("Failed to fetch stock data");
 
 }
 
