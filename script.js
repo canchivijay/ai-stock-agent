@@ -1,7 +1,7 @@
 
 async function getStock(symbol){
 
-let url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}`;
+let url = `https://corsproxy.io/?https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbol}`;
 
 let response = await fetch(url);
 let data = await response.json();
